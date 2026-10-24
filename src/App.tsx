@@ -5,8 +5,9 @@ import { BleClient } from "@capacitor-community/bluetooth-le";
 import { BluetoothSerial, type BluetoothDevice as ClassicBluetoothDevice } from "@e-is/capacitor-bluetooth-serial";
 import { ArduinoUsb, Infrared, NfcNative, PhoneSensors, type EnvironmentReading, type MagneticReading, type UsbArduinoDevice } from "./nativeBridge";
 import { encodeIr, irKeyMaps, powerCandidates, type IrProtocol } from "./irProtocols";
+import ProjectWorkspace from "./ProjectWorkspace";
 
-type TabId = "ir" | "ble" | "net" | "nfc" | "sub" | "sensors" | "ai" | "hw";
+type TabId = "ir" | "ble" | "net" | "nfc" | "sub" | "sensors" | "ai" | "projects" | "hw";
 type LogTone = "normal" | "success" | "warning" | "error" | "info";
 
 type LogLine = {
@@ -94,6 +95,7 @@ const tabs: Array<{ id: TabId; label: string; icon: IconName }> = [
   { id: "sub", label: "Sub-GHz", icon: "radio" },
   { id: "sensors", label: "سنسورها", icon: "magnet" },
   { id: "ai", label: "دستیار", icon: "spark" },
+  { id: "projects", label: "پروژه‌ها", icon: "code" },
   { id: "hw", label: "سخت افزار", icon: "chip" },
 ];
 
@@ -1273,6 +1275,8 @@ export default function App() {
             </section>
           </div>
         )}
+
+        {activeTab === "projects" && <ProjectWorkspace />}
 
         {activeTab === "hw" && (
           <div className="hardware-layout">
